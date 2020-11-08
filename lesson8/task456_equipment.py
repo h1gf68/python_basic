@@ -5,6 +5,7 @@ class MaxLimit(Exception):
     def __init__(self, error="This Storehouse is full!"):
         self.error = error
 
+
 class StoreHouse:
     equipDict = {"Printer": [], "Scanner": [], "XeroxMachine": []}
     maxEquipment = 100  # количество мест в хранилище
@@ -118,38 +119,6 @@ class XeroxMachine(Equipment):
         StoreHouse(type(self).__name__, self.equipment)
 
 
-# заготовка
-"""equipments = {
-    "Printer": [
-        {'manufacturer': "HP", 'model': "M1132", 'quantity': 12, 'price': 18000, 'discount': 0.2, 'pType': "лазерный"},
-        {'manufacturer': "Xerox", 'model': "Phaser 3010", 'quantity': 3, 'price': 13500, 'discount': 0.15,
-         'pType': "лазерный"},
-        {'manufacturer': "Canon", 'model': "PIXMA G1411", 'quantity': 4, 'price': 9500, 'discount': 0.1,
-         'pType': "струйный"},
-        {'manufacturer': "Canon", 'model': "iSensys LBP710Сx", 'quantity': 5, 'price': 35900, 'discount': 0.15,
-         'pType': "лазерный"},
-        {'manufacturer': "HP", 'model': "Ink Tank 115", 'quantity': 7, 'price': 9500, 'discount': 0.2,
-         'pType': "струйный"},
-        {'manufacturer': "HP", 'model': "Laser 107w", 'quantity': 7, 'price': 7700, 'discount': 0.1,
-         'pType': "лазерный"}
-    ],
-    "Scanner": [
-        {'manufacturer': "Canon", 'model': "CanoScan LiDE 300", 'quantity': 2, 'price': 5300, 'discount': 0.25,
-         'quality': 1500},
-        {'manufacturer': "Epson", 'model': "Perfection V19", 'quantity': 1, 'price': 5800, 'discount': 0.22,
-         'quality': 1500},
-        {'manufacturer': "Fujitsu", 'model': "ScanSnap S1300i", 'quantity': 2, 'price': 24000, 'discount': 0.25,
-         'quality': 2600}
-    ],
-    "XeroxMachine": [
-        {'manufacturer': "HP", 'model': "M183fw", 'quantity': 1, 'price': 27500, 'discount': 0.25,
-         'isDocFeeder': True},
-        {'manufacturer': "HP", 'model': "M283fdn", 'quantity': 1, 'price': 30300, 'discount': 0.15,
-         'isDocFeeder': True},
-        {'manufacturer': "Xerox", 'model': "B205VNI", 'quantity': 1, 'price': 14000, 'discount': 0.15}
-    ]
-}"""
-
 with open("storehouse.json", encoding="utf-8") as storehouse:
     equip = json.load(storehouse)
 
@@ -157,7 +126,6 @@ for devType in list(equip.keys()):
     for dev in equip[devType]:
         tmp = '\",\"'.join(map(str, (list(dict(dev).values()))))
         eval(f"{devType}(\"{tmp}\")")
-
 
 print("Quantity models of devices: ", StoreHouse.print_all_equip())
 print()
